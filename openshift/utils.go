@@ -2,12 +2,16 @@ package openshift
 
 import (
 	"context"
+	"errors"
 	"fmt"
+	"io/ioutil"
 	"os"
+	"strings"
 
 	"github.com/mitchellh/go-homedir"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"
+	"gopkg.in/yaml.v2"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/labels"
 	"k8s.io/client-go/rest"
@@ -50,8 +54,34 @@ func GetNewClientUncached(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 	if err != nil {
 		return nil, err
 	}
-	loader.ExplicitPath = path
 
+	// by default plugin will consider first available openshift cluster context
+	data, err := ioutil.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+
+	var config map[string]interface{}
+	err = yaml.Unmarshal(data, &config)
+	if err != nil {
+		return nil, err
+	}
+
+	var flag = 0
+	for k, v := range config {
+		if k == "current-context" && strings.Contains(v.(string), "openshift") {
+			overrides.CurrentContext = v.(string)
+			flag = 1
+			break
+		}
+	}
+
+	// check if there is any openshift config available
+	if flag == 0 {
+		return nil, errors.New("openshift cluster details is unavailable in: " + path)
+	}
+
+	loader.ExplicitPath = path
 	if openshiftConfig.ConfigContext != nil {
 		overrides.CurrentContext = *openshiftConfig.ConfigContext
 		overrides.Context = clientcmdapi.Context{}
