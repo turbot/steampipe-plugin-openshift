@@ -3,6 +3,7 @@ package openshift
 import (
 	"context"
 	"fmt"
+	"os"
 
 	"github.com/mitchellh/go-homedir"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
@@ -36,38 +37,24 @@ func GetNewClientUncached(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 
 	// variable to store paths for kubernetes config
 	// default kube config path
-	var configPaths = []string{"~/.kube/config"}
+	var configPath = "~/.kube/config"
 
-	// if openshiftConfig.ConfigPath != nil {
-	// 	configPaths = []string{*openshiftConfig.ConfigPath}
-	// } else if openshiftConfig.ConfigPaths != nil && len(openshiftConfig.ConfigPaths) > 0 {
-	// 	configPaths = openshiftConfig.ConfigPaths
-	// } else if v := os.Getenv("KUBE_CONFIG_PATHS"); v != "" {
-	// 	configPaths = filepath.SplitList(v)
-	// } else if v := os.Getenv("KUBERNETES_MASTER"); v != "" {
-	// 	configPaths = []string{v}
-	// }
+	if openshiftConfig.ConfigPath != nil {
+		configPath = *openshiftConfig.ConfigPath
+	} else if v := os.Getenv("KUBE_CONFIG"); v != "" {
+		configPath = v
+	} else if v := os.Getenv("KUBERNETES_MASTER"); v != "" {
+		configPath = v
+	}
+	path, err := homedir.Expand(configPath)
+	if err != nil {
+		return nil, err
+	}
+	loader.ExplicitPath = path
 
-	if len(configPaths) > 0 {
-		expandedPaths := []string{}
-		for _, p := range configPaths {
-			path, err := homedir.Expand(p)
-			if err != nil {
-				return nil, err
-			}
-			expandedPaths = append(expandedPaths, path)
-		}
-
-		if len(expandedPaths) == 1 {
-			loader.ExplicitPath = expandedPaths[0]
-		} else {
-			loader.Precedence = expandedPaths
-		}
-
-		if openshiftConfig.ConfigContext != nil {
-			overrides.CurrentContext = *openshiftConfig.ConfigContext
-			overrides.Context = clientcmdapi.Context{}
-		}
+	if openshiftConfig.ConfigContext != nil {
+		overrides.CurrentContext = *openshiftConfig.ConfigContext
+		overrides.Context = clientcmdapi.Context{}
 	}
 
 	osConfig := clientcmd.NewNonInteractiveDeferredLoadingClientConfig(loader, overrides)
