@@ -67,6 +67,7 @@ func GetNewClientUncached(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 		return nil, err
 	}
 
+	// take the first context available
 	var flag = 0
 	for k, v := range config {
 		if k == "current-context" && strings.Contains(v.(string), "openshift") {
@@ -82,6 +83,8 @@ func GetNewClientUncached(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 	}
 
 	loader.ExplicitPath = path
+
+	// override context if provided in the connection config file
 	if openshiftConfig.ConfigContext != nil {
 		overrides.CurrentContext = *openshiftConfig.ConfigContext
 		overrides.Context = clientcmdapi.Context{}
