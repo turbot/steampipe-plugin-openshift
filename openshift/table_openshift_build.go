@@ -2,6 +2,7 @@ package openshift
 
 import (
 	"context"
+	"strings"
 
 	client_v1 "github.com/openshift/client-go/build/clientset/versioned/typed/build/v1"
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
@@ -15,7 +16,8 @@ func tableOpenShiftBuild(ctx context.Context) *plugin.Table {
 		Name:        "openshift_build",
 		Description: "Retrieve information about your builds.",
 		List: &plugin.ListConfig{
-			Hydrate: listBuilds,
+			Hydrate:    listBuilds,
+			KeyColumns: getCommonOptionalKeyQuals(),
 		},
 		Get: &plugin.GetConfig{
 			KeyColumns: plugin.AllColumns([]string{"name", "namespace"}),
@@ -141,6 +143,12 @@ func listBuilds(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData)
 
 	input := v1.ListOptions{
 		Limit: maxLimit,
+	}
+
+	commonFieldSelectorValue := getCommonOptionalKeyQualsValueForFieldSelector(d)
+
+	if len(commonFieldSelectorValue) > 0 {
+		input.FieldSelector = strings.Join(commonFieldSelectorValue, ",")
 	}
 
 	for {

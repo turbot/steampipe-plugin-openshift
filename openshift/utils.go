@@ -13,7 +13,6 @@ import (
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"
 	"gopkg.in/yaml.v2"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/apimachinery/pkg/labels"
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
 	clientcmdapi "k8s.io/client-go/tools/clientcmd/api"
@@ -39,7 +38,6 @@ func GetNewClientUncached(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 	loader := &clientcmd.ClientConfigLoadingRules{}
 	overrides := &clientcmd.ConfigOverrides{}
 
-	// variable to store paths for kubernetes config
 	// default kube config path
 	var configPath = "~/.kube/config"
 
@@ -47,7 +45,7 @@ func GetNewClientUncached(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 		configPath = *openshiftConfig.ConfigPath
 	} else if v := os.Getenv("KUBE_CONFIG"); v != "" {
 		configPath = v
-	} else if v := os.Getenv("KUBERNETES_MASTER"); v != "" {
+	} else if v := os.Getenv("KUBECONFIG"); v != "" {
 		configPath = v
 	}
 	path, err := homedir.Expand(configPath)
@@ -67,17 +65,18 @@ func GetNewClientUncached(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 		return nil, err
 	}
 
-	// take the first context available
+	// by default plugin will consider the current context available
 	var flag = 0
 	for k, v := range config {
 		if k == "current-context" && strings.Contains(v.(string), "openshift") {
 			overrides.CurrentContext = v.(string)
+			overrides.Context = clientcmdapi.Context{}
 			flag = 1
 			break
 		}
 	}
 
-	// check if there is any openshift config available
+	// return err if no openshift config available
 	if flag == 0 {
 		return nil, errors.New("openshift cluster details is unavailable in: " + path)
 	}
@@ -119,29 +118,23 @@ func v1TimeToRFC3339(_ context.Context, d *transform.TransformData) (interface{}
 	}
 }
 
-func selectorMapToString(ctx context.Context, d *transform.TransformData) (interface{}, error) {
-	selector_map := d.Value.(map[string]string)
-
-	if len(selector_map) == 0 {
-		return nil, nil
+func getCommonOptionalKeyQuals() []*plugin.KeyColumn {
+	return []*plugin.KeyColumn{
+		{Name: "name", Require: plugin.Optional},
+		{Name: "namespace", Require: plugin.Optional},
 	}
-
-	selector_string := labels.SelectorFromSet(selector_map).String()
-
-	return selector_string, nil
 }
 
-func labelSelectorToString(_ context.Context, d *transform.TransformData) (interface{}, error) {
-	if d.Value == nil {
-		return nil, nil
+func getCommonOptionalKeyQualsValueForFieldSelector(d *plugin.QueryData) []string {
+	fieldSelectors := []string{}
+
+	if d.EqualsQualString("name") != "" {
+		fieldSelectors = append(fieldSelectors, fmt.Sprintf("metadata.name=%v", d.EqualsQualString("name")))
 	}
 
-	selector := d.Value.(*v1.LabelSelector)
-
-	ss, err := v1.LabelSelectorAsSelector(selector)
-	if err != nil {
-		return nil, err
+	if d.EqualsQualString("namespace") != "" {
+		fieldSelectors = append(fieldSelectors, fmt.Sprintf("metadata.namespace=%v", d.EqualsQualString("namespace")))
 	}
 
-	return ss.String(), nil
+	return fieldSelectors
 }

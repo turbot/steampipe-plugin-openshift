@@ -2,6 +2,7 @@ package openshift
 
 import (
 	"context"
+	"strings"
 
 	client_v1 "github.com/openshift/client-go/apps/clientset/versioned/typed/apps/v1"
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
@@ -15,7 +16,8 @@ func tableOpenShiftDeploymentConfig(ctx context.Context) *plugin.Table {
 		Name:        "openshift_deployment_config",
 		Description: "Retrieve information about your deployment configs.",
 		List: &plugin.ListConfig{
-			Hydrate: listDeploymentConfigs,
+			Hydrate:    listDeploymentConfigs,
+			KeyColumns: getCommonOptionalKeyQuals(),
 		},
 		Get: &plugin.GetConfig{
 			KeyColumns: plugin.AllColumns([]string{"name", "namespace"}),
@@ -165,6 +167,12 @@ func listDeploymentConfigs(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 
 	input := v1.ListOptions{
 		Limit: maxLimit,
+	}
+
+	commonFieldSelectorValue := getCommonOptionalKeyQualsValueForFieldSelector(d)
+
+	if len(commonFieldSelectorValue) > 0 {
+		input.FieldSelector = strings.Join(commonFieldSelectorValue, ",")
 	}
 
 	for {
