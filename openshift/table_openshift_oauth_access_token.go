@@ -13,7 +13,7 @@ import (
 func tableOpenShiftOAuthAccessToken(ctx context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "openshift_oauth_access_token",
-		Description: "Retrieve information about OpenShift OAuth Access Tokens.",
+		Description: "Retrieve information about OpenShift oauth access tokens.",
 		List: &plugin.ListConfig{
 			Hydrate: listOAuthAccessTokens,
 		},

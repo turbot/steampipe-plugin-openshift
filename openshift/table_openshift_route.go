@@ -14,7 +14,7 @@ import (
 func tableOpenShiftRoute(ctx context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "openshift_route",
-		Description: "Retrieve information about OpenShift Routes.",
+		Description: "Retrieve information about OpenShift routes.",
 		List: &plugin.ListConfig{
 			Hydrate:    listRoutes,
 			KeyColumns: getCommonOptionalKeyQuals(),

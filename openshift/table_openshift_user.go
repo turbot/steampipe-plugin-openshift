@@ -13,7 +13,7 @@ import (
 func tableOpenShiftUser(ctx context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "openshift_user",
-		Description: "Retrieve information about OpenShift Users.",
+		Description: "Retrieve information about OpenShift users.",
 		List: &plugin.ListConfig{
 			Hydrate: listUsers,
 		},

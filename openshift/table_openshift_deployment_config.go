@@ -14,7 +14,7 @@ import (
 func tableOpenShiftDeploymentConfig(ctx context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "openshift_deployment_config",
-		Description: "Retrieve information about OpenShift Deployment Configs.",
+		Description: "Retrieve information about OpenShift deployment configs.",
 		List: &plugin.ListConfig{
 			Hydrate:    listDeploymentConfigs,
 			KeyColumns: getCommonOptionalKeyQuals(),

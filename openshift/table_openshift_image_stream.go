@@ -14,7 +14,7 @@ import (
 func tableOpenShiftImageStream(ctx context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "openshift_image_stream",
-		Description: "Retrieve information about OpenShift Image Streams.",
+		Description: "Retrieve information about OpenShift image streams.",
 		List: &plugin.ListConfig{
 			Hydrate:    listImageStreams,
 			KeyColumns: getCommonOptionalKeyQuals(),

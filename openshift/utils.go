@@ -53,7 +53,6 @@ func GetNewClientUncached(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 		return nil, err
 	}
 
-	// by default plugin will consider first available openshift cluster context
 	data, err := ioutil.ReadFile(path)
 	if err != nil {
 		return nil, err
