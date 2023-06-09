@@ -78,6 +78,9 @@ connection "openshift" {
 }
 ```
 
+- `config_context` - (Optional) The kubeconfig context to use. If not set, the current context will be used.
+- `config_path` - (Optional) The kubeconfig file path. If not set, the plugin will check `~/.kube/config`. Can also be set with the `KUBE_CONFIG` or `KUBECONFIG` environment variables.
+
 ## Configuring OpenShift Credentials
 
 By default, the plugin will use the kubeconfig in `~/.kube/config` with the current context. If using the default oc CLI configurations, the kubeconfig will be in this location and the OpenShift plugin connections will work by default.
