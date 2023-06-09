@@ -13,7 +13,7 @@ import (
 func tableOpenShiftUser(ctx context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "openshift_user",
-		Description: "Retrieve information about your users.",
+		Description: "Retrieve information about OpenShift Users.",
 		List: &plugin.ListConfig{
 			Hydrate: listUsers,
 		},
@@ -57,7 +57,7 @@ func listUsers(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) 
 	}
 
 	// Limiting the results
-	maxLimit := int64(500)
+	maxLimit := int64(1000)
 	if d.QueryContext.Limit != nil {
 		limit := *d.QueryContext.Limit
 		if limit < maxLimit {

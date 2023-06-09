@@ -14,7 +14,7 @@ import (
 func tableOpenShiftDeploymentConfig(ctx context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "openshift_deployment_config",
-		Description: "Retrieve information about your deployment configs.",
+		Description: "Retrieve information about OpenShift Deployment Configs.",
 		List: &plugin.ListConfig{
 			Hydrate:    listDeploymentConfigs,
 			KeyColumns: getCommonOptionalKeyQuals(),
@@ -157,7 +157,7 @@ func listDeploymentConfigs(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 	}
 
 	// Limiting the results
-	maxLimit := int64(500)
+	maxLimit := int64(1000)
 	if d.QueryContext.Limit != nil {
 		limit := *d.QueryContext.Limit
 		if limit < maxLimit {

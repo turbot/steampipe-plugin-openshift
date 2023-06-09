@@ -21,14 +21,14 @@ func Plugin(ctx context.Context) *plugin.Plugin {
 			Schema:      ConfigSchema,
 		},
 		TableMap: map[string]*plugin.Table{
-			"openshift_project":            tableOpenShiftProject(ctx),
-			"openshift_user":               tableOpenShiftUser(ctx),
-			"openshift_deployment_config":  tableOpenShiftDeploymentConfig(ctx),
-			"openshift_route":              tableOpenShiftRoute(ctx),
-			"openshift_build_config":       tableOpenShiftBuildConfig(ctx),
 			"openshift_build":              tableOpenShiftBuild(ctx),
+			"openshift_build_config":       tableOpenShiftBuildConfig(ctx),
+			"openshift_deployment_config":  tableOpenShiftDeploymentConfig(ctx),
 			"openshift_image_stream":       tableOpenShiftImageStream(ctx),
+			"openshift_project":            tableOpenShiftProject(ctx),
 			"openshift_oauth_access_token": tableOpenShiftOAuthAccessToken(ctx),
+			"openshift_route":              tableOpenShiftRoute(ctx),
+			"openshift_user":               tableOpenShiftUser(ctx),
 		},
 	}
 	return p

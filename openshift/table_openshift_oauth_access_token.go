@@ -13,7 +13,7 @@ import (
 func tableOpenShiftOAuthAccessToken(ctx context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "openshift_oauth_access_token",
-		Description: "Retrieve information about your OAuth access tokens.",
+		Description: "Retrieve information about OpenShift OAuth Access Tokens.",
 		List: &plugin.ListConfig{
 			Hydrate: listOAuthAccessTokens,
 		},
@@ -94,7 +94,7 @@ func listOAuthAccessTokens(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 	}
 
 	// Limiting the results
-	maxLimit := int64(500)
+	maxLimit := int64(1000)
 	if d.QueryContext.Limit != nil {
 		limit := *d.QueryContext.Limit
 		if limit < maxLimit {

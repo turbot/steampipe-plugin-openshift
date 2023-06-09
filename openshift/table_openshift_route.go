@@ -14,7 +14,7 @@ import (
 func tableOpenShiftRoute(ctx context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "openshift_route",
-		Description: "Retrieve information about your routes.",
+		Description: "Retrieve information about OpenShift Routes.",
 		List: &plugin.ListConfig{
 			Hydrate:    listRoutes,
 			KeyColumns: getCommonOptionalKeyQuals(),
@@ -37,7 +37,7 @@ func tableOpenShiftRoute(ctx context.Context) *plugin.Table {
 				Transform:   transform.FromField("Spec.Path"),
 			},
 			{
-				Name:        "to",
+				Name:        "spec_to",
 				Type:        proto.ColumnType_JSON,
 				Description: "To is an object the route should use as the primary backend. Only the Service kind is allowed, and it will be defaulted to Service. If the weight field (0-256 default 1) is set to zero, no traffic will be sent to this backend.",
 				Transform:   transform.FromField("Spec.To"),
@@ -97,7 +97,7 @@ func listRoutes(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData)
 	}
 
 	// Limiting the results
-	maxLimit := int64(500)
+	maxLimit := int64(1000)
 	if d.QueryContext.Limit != nil {
 		limit := *d.QueryContext.Limit
 		if limit < maxLimit {

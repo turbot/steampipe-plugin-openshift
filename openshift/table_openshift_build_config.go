@@ -14,7 +14,7 @@ import (
 func tableOpenShiftBuildConfig(ctx context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "openshift_build_config",
-		Description: "Retrieve information about your build configs.",
+		Description: "Retrieve information about OpenShift Build Configs.",
 		List: &plugin.ListConfig{
 			Hydrate:    listBuildConfigs,
 			KeyColumns: getCommonOptionalKeyQuals(),

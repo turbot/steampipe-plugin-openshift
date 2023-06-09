@@ -14,7 +14,7 @@ import (
 func tableOpenShiftBuild(ctx context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "openshift_build",
-		Description: "Retrieve information about your builds.",
+		Description: "Retrieve information about OpenShift Builds.",
 		List: &plugin.ListConfig{
 			Hydrate:    listBuilds,
 			KeyColumns: getCommonOptionalKeyQuals(),
@@ -133,7 +133,7 @@ func listBuilds(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData)
 	}
 
 	// Limiting the results
-	maxLimit := int64(500)
+	maxLimit := int64(1000)
 	if d.QueryContext.Limit != nil {
 		limit := *d.QueryContext.Limit
 		if limit < maxLimit {

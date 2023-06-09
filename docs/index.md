@@ -16,7 +16,7 @@ og_image: "/images/plugins/turbot/openshift-social-graphic.png"
 
 [Steampipe](https://steampipe.io) is an open source CLI to instantly query cloud APIs using SQL.
 
-For example:
+List your OpenShift projects:
 
 ```sql
 select
@@ -54,12 +54,7 @@ steampipe plugin install openshift
 
 ### Credentials
 
-| Item        | Description                                                                                                                                                                                       |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Credentials | OpenShift requires an `config_path` or `config_path` and `config_context` for all requests. |
-| Permissions | The permission scope of Secret IDs is set by the Admin at the creation time of the [ACL tokens](https://developer.hashicorp.com/openshift/tutorials/web-ui/web-ui-access).                        |
-| Radius      | Each connection represents a single OpenShift Installation.                                                                                                                                           |
-| Resolution  | 1. Credentials explicitly set in a steampipe config file (`~/.steampipe/config/openshift.spc`)<br />2. Credentials specified in environment variables, e.g., `KUBE_CONFIG` and `KUBECONFIG`.      |
+No credentials are required.
 
 ### Configuration
 
@@ -83,13 +78,11 @@ connection "openshift" {
 }
 ```
 
-Alternatively, you can also use the standard OpenShift environment variable to obtain credentials **only if other arguments (`address`, `token`, and `namespace`) are not specified** in the connection:
+## Configuring OpenShift Credentials
 
-```sh
-export NOMAD_ADDR=http://18.118.144.168:4646
-export NOMAD_TOKEN=c178b810-8b18-6f38-016f-725ddec5d58
-export NOMAD_NAMESPACE=*
-```
+By default, the plugin will use the kubeconfig in `~/.kube/config` with the current context. If using the default oc CLI configurations, the kubeconfig will be in this location and the OpenShift plugin connections will work by default.
+
+You can also set the kubeconfig file path and context with the `config_path` and `config_context` config arguments respectively.
 
 ## Get involved
 

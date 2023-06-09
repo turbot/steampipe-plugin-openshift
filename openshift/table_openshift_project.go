@@ -13,7 +13,7 @@ import (
 func tableOpenShiftProject(ctx context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "openshift_project",
-		Description: "Retrieve information about your projects.",
+		Description: "Retrieve information about OpenShift Projects.",
 		List: &plugin.ListConfig{
 			Hydrate: listProjects,
 		},
@@ -59,7 +59,7 @@ func listProjects(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDat
 	}
 
 	// Limiting the results
-	maxLimit := int64(500)
+	maxLimit := int64(1000)
 	if d.QueryContext.Limit != nil {
 		limit := *d.QueryContext.Limit
 		if limit < maxLimit {

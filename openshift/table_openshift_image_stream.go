@@ -14,7 +14,7 @@ import (
 func tableOpenShiftImageStream(ctx context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "openshift_image_stream",
-		Description: "Retrieve information about your image streams.",
+		Description: "Retrieve information about OpenShift Image Streams.",
 		List: &plugin.ListConfig{
 			Hydrate:    listImageStreams,
 			KeyColumns: getCommonOptionalKeyQuals(),
@@ -79,7 +79,7 @@ func listImageStreams(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrat
 	}
 
 	// Limiting the results
-	maxLimit := int64(500)
+	maxLimit := int64(1000)
 	if d.QueryContext.Limit != nil {
 		limit := *d.QueryContext.Limit
 		if limit < maxLimit {
