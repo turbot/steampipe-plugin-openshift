@@ -2,7 +2,7 @@
 organization: Turbot
 category: ["software development"]
 icon_url: "/images/plugins/turbot/openshift.svg"
-brand_color: ""
+brand_color: "#DB212E"
 display_name: "OpenShift"
 short_name: "openshift"
 description: "Steampipe plugin to query projects, routes, builds and more from OpenShift."
