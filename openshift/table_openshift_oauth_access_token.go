@@ -10,6 +10,7 @@ import (
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
+//// TABLE DEFINITION
 func tableOpenShiftOAuthAccessToken(ctx context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "openshift_oauth_access_token",
@@ -81,6 +82,7 @@ func tableOpenShiftOAuthAccessToken(ctx context.Context) *plugin.Table {
 	}
 }
 
+// LIST FUNCTION
 func listOAuthAccessTokens(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	config, err := getClient(ctx, d)
 	if err != nil {
@@ -130,6 +132,7 @@ func listOAuthAccessTokens(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 	return nil, nil
 }
 
+// HYDRATE FUNCTIONS
 func getOAuthAccessToken(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	name := d.EqualsQualString("name")
 

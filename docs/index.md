@@ -69,17 +69,14 @@ connection "openshift" {
   # By default, the plugin will use credentials in "~/.kube/config" with the current context.
   # The kubeconfig path and context can also be specified with the following config arguments:
 
-  # Specify the file path to the kubeconfig.
+  # Specify the file path to the kubeconfig. If not set, the plugin will check `~/.kube/config`.
   # Can also be set with the "KUBE_CONFIG" or "KUBECONFIG" environment variables.
   # config_path = "~/.kube/config"
 
-  # Specify a context other than the current one.
+  # Specify a context other than the current one. If not set, the current context will be used. Optional.
   # config_context = "default/api-openshift-test-dq1i-p2-openshiftapps-com:6443/test"
 }
 ```
-
-- `config_context` - (Optional) The kubeconfig context to use. If not set, the current context will be used.
-- `config_path` - (Optional) The kubeconfig file path. If not set, the plugin will check `~/.kube/config`. Can also be set with the `KUBE_CONFIG` or `KUBECONFIG` environment variables.
 
 ## Configuring OpenShift Credentials
 
@@ -90,4 +87,4 @@ You can also set the kubeconfig file path and context with the `config_path` and
 ## Get involved
 
 - Open source: https://github.com/turbot/steampipe-plugin-openshift
-- Community: [Slack Channel](https://steampipe.io/community/join)
+- Community: [Join #steampipe on Slack →](https://turbot.com/community/join)

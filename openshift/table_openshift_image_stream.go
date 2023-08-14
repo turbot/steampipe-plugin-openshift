@@ -11,6 +11,7 @@ import (
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
+//// TABLE DEFINITION
 func tableOpenShiftImageStream(ctx context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "openshift_image_stream",
@@ -66,6 +67,7 @@ func tableOpenShiftImageStream(ctx context.Context) *plugin.Table {
 	}
 }
 
+// LIST FUNCTION
 func listImageStreams(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	config, err := getClient(ctx, d)
 	if err != nil {
@@ -121,6 +123,7 @@ func listImageStreams(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrat
 	return nil, nil
 }
 
+// HYDRATE FUNCTIONS
 func getImageStream(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	name := d.EqualsQualString("name")
 	namespace := d.EqualsQualString("namespace")

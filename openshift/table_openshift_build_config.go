@@ -11,6 +11,7 @@ import (
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
+//// TABLE DEFINITION
 func tableOpenShiftBuildConfig(ctx context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "openshift_build_config",
@@ -72,6 +73,8 @@ func tableOpenShiftBuildConfig(ctx context.Context) *plugin.Table {
 	}
 }
 
+// LIST FUNCTION
+
 func listBuildConfigs(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	config, err := getClient(ctx, d)
 	if err != nil {
@@ -126,6 +129,8 @@ func listBuildConfigs(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrat
 
 	return nil, nil
 }
+
+// HYDRATE FUNCTIONS
 
 func getBuildConfig(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	name := d.EqualsQualString("name")

@@ -21,7 +21,7 @@ steampipe plugin install openshift
 
 Configure your [config file](https://hub.steampipe.io/plugins/turbot/openshift#configuration).
 
-Add your configuration details in `~/.steampipe/config/openshift.spc`:
+Configure your account details in `~/.steampipe/config/openshift.spc`:
 
 ```hcl
 connection "openshift" {
@@ -31,12 +31,21 @@ connection "openshift" {
   # The kubeconfig path and context can also be specified with the following config arguments:
 
   # Specify the file path to the kubeconfig.
-  # Can also be set with the "KUBE_CONFIG" or "KUBECONFIG" environment variables.
+  # Can also be set with the `KUBE_CONFIG` or `KUBECONFIG` environment variables.
   # config_path = "~/.kube/config"
 
-  # Specify a context other than the current one.
+  # Specify a context other than the current one. Optional.
   # config_context = "default/api-openshift-test-dq1i-p2-openshiftapps-com:6443/test"
 }
+```
+
+Or through environment variables:
+```sh
+export KUBE_CONFIG=~/.kube/config
+```
+or
+```sh
+export KUBECONFIG=~/.kube/config
 ```
 
 Run steampipe:
@@ -108,7 +117,7 @@ Further reading:
 
 ## Contributing
 
-Please see the [contribution guidelines](https://github.com/turbot/steampipe/blob/main/CONTRIBUTING.md) and our [code of conduct](https://github.com/turbot/steampipe/blob/main/CODE_OF_CONDUCT.md). All contributions are subject to the [Apache 2.0 open source license](https://github.com/turbot/steampipe-plugin-openshift/blob/main/LICENSE).
+Please see the [contribution guidelines](https://github.com/turbot/steampipe/blob/main/CONTRIBUTING.md) and our [code of conduct](https://github.com/turbot/steampipe/blob/main/CODE_OF_CONDUCT.md). All contributions are subject to the [Apache 2.0 open source license](https://github.com/turbot/steampipe-plugin-namecheap/blob/main/LICENSE).
 
 `help wanted` issues:
 

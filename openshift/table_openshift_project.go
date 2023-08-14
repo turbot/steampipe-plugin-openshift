@@ -10,6 +10,7 @@ import (
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
+//// TABLE DEFINITION
 func tableOpenShiftProject(ctx context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "openshift_project",
@@ -46,6 +47,7 @@ func tableOpenShiftProject(ctx context.Context) *plugin.Table {
 	}
 }
 
+// LIST FUNCTION
 func listProjects(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	config, err := getClient(ctx, d)
 	if err != nil {
@@ -95,6 +97,7 @@ func listProjects(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDat
 	return nil, nil
 }
 
+// HYDRATE FUNCTIONS
 func getProject(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	name := d.EqualsQualString("name")
 

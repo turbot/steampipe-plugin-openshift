@@ -11,6 +11,7 @@ import (
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
+//// TABLE DEFINITION
 func tableOpenShiftDeploymentConfig(ctx context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "openshift_deployment_config",
@@ -91,7 +92,7 @@ func tableOpenShiftDeploymentConfig(ctx context.Context) *plugin.Table {
 				Transform:   transform.FromField("Status.ObservedGeneration"),
 			},
 			{
-				Name:        "status_replicas",
+				Name:        "replicas",
 				Type:        proto.ColumnType_INT,
 				Description: "Replicas is the total number of pods targeted by this deployment config.",
 				Transform:   transform.FromField("Status.Replicas"),
@@ -144,6 +145,7 @@ func tableOpenShiftDeploymentConfig(ctx context.Context) *plugin.Table {
 	}
 }
 
+// LIST FUNCTION
 func listDeploymentConfigs(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	config, err := getClient(ctx, d)
 	if err != nil {
@@ -199,6 +201,7 @@ func listDeploymentConfigs(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 	return nil, nil
 }
 
+// HYDRATE FUNCTIONS
 func getDeploymentConfig(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	name := d.EqualsQualString("name")
 	namespace := d.EqualsQualString("namespace")
