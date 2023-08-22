@@ -27,54 +27,60 @@ func tableOpenShiftRoute(ctx context.Context) *plugin.Table {
 		Columns: commonColumns([]*plugin.Column{
 			{
 				Name:        "host",
-				Type:        proto.ColumnType_STRING,
 				Description: "Host is an alias/DNS that points to the service. Optional. If not specified a route name will typically be automatically chosen. Must follow DNS952 subdomain conventions.",
+				Type:        proto.ColumnType_STRING,
 				Transform:   transform.FromField("Spec.Host"),
 			},
 			{
 				Name:        "path",
-				Type:        proto.ColumnType_STRING,
 				Description: "Path that the router watches for, to route traffic for to the service.",
 				Transform:   transform.FromField("Spec.Path"),
+				Type:        proto.ColumnType_STRING,
 			},
 			{
 				Name:        "spec_to",
-				Type:        proto.ColumnType_JSON,
 				Description: "To is an object the route should use as the primary backend. Only the Service kind is allowed, and it will be defaulted to Service. If the weight field (0-256 default 1) is set to zero, no traffic will be sent to this backend.",
+				Type:        proto.ColumnType_JSON,
 				Transform:   transform.FromField("Spec.To"),
 			},
 			{
 				Name:        "alternate_backends",
-				Type:        proto.ColumnType_JSON,
 				Description: "Alternate backends allows up to 3 additional backends to be assigned to the route. Only the Service kind is allowed, and it will be defaulted to Service.Use the weight field in RouteTargetReference object to specify relative preference.",
+				Type:        proto.ColumnType_JSON,
 				Transform:   transform.FromField("Spec.AlternateBackends"),
 			},
 			{
 				Name:        "port",
-				Type:        proto.ColumnType_JSON,
 				Description: "If specified, the port to be used by the router. Most routers will use all endpoints exposed by the service by default - set this value to instruct routers which port to use.",
+				Type:        proto.ColumnType_JSON,
 				Transform:   transform.FromField("Spec.Port"),
 			},
 			{
+				Name:        "subdomain",
+				Description: "Subdomain is a DNS subdomain that is requested within the ingress controller's domain (as a subdomain). If host is set this field is ignored. An ingress controller may choose to ignore this suggested name, in which case the controller will report the assigned name in the status.",
+				Type:        proto.ColumnType_STRING,
+				Transform:   transform.FromField("Spec.Subdomain"),
+			},
+			{
 				Name:        "tls",
-				Type:        proto.ColumnType_JSON,
 				Description: "The tls field provides the ability to configure certificates and termination for the route.",
+				Type:        proto.ColumnType_JSON,
 				Transform:   transform.FromField("Spec.TLS"),
 			},
 			{
 				Name:        "wildcard_policy",
-				Type:        proto.ColumnType_STRING,
 				Description: "Wildcard policy if any for the route.Currently only 'Subdomain' or 'None' is allowed.",
+				Type:        proto.ColumnType_STRING,
 				Transform:   transform.FromField("Spec.WildcardPolicy"),
 			},
 			{
 				Name:        "ingress",
-				Type:        proto.ColumnType_JSON,
 				Description: "Ingress describes the places where the route may be exposed. The list of ingress points may contain duplicate Host or RouterName values. Routes are considered live once they are `Ready`.",
+				Type:        proto.ColumnType_JSON,
 				Transform:   transform.FromField("Status.Ingress"),
 			},
 
-			/// Steampipe standard columns
+			// Steampipe standard columns
 			{
 				Name:        "title",
 				Description: "Title of the resource.",

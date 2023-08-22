@@ -25,18 +25,24 @@ func tableOpenShiftProject(ctx context.Context) *plugin.Table {
 		Columns: commonColumns([]*plugin.Column{
 			{
 				Name:        "phase",
-				Type:        proto.ColumnType_STRING,
 				Description: "Phase is the current lifecycle phase of the project.",
+				Type:        proto.ColumnType_STRING,
 				Transform:   transform.FromField("Status.Phase"),
 			},
 			{
-				Name:        "spec_finalizers",
+				Name:        "conditions",
+				Description: "Represents the latest available observations of the project current state.",
 				Type:        proto.ColumnType_JSON,
+				Transform:   transform.FromField("Status.Conditions"),
+			},
+			{
+				Name:        "spec_finalizers",
 				Description: "Finalizers is an opaque list of values that must be empty to permanently remove object from storage.",
+				Type:        proto.ColumnType_JSON,
 				Transform:   transform.FromField("Spec.Finalizers"),
 			},
 
-			/// Steampipe standard columns
+			// Steampipe standard columns
 			{
 				Name:        "title",
 				Description: "Title of the resource.",

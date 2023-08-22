@@ -27,42 +27,48 @@ func tableOpenShiftBuildConfig(ctx context.Context) *plugin.Table {
 		Columns: commonColumns([]*plugin.Column{
 			{
 				Name:        "common_spec",
-				Type:        proto.ColumnType_JSON,
 				Description: "CommonSpec is the desired build specification.",
+				Type:        proto.ColumnType_JSON,
 				Transform:   transform.FromField("Spec.CommonSpec"),
 			},
 			{
 				Name:        "triggers",
-				Type:        proto.ColumnType_JSON,
 				Description: "Triggers determine how new Builds can be launched from a BuildConfig. If no triggers are defined, a new build can only occur as a result of an explicit client build creation.",
+				Type:        proto.ColumnType_JSON,
 				Transform:   transform.FromField("Spec.Triggers"),
 			},
 			{
 				Name:        "run_policy",
-				Type:        proto.ColumnType_STRING,
 				Description: "RunPolicy describes how the new build created from this build configuration will be scheduled for execution. This is optional, if not specified we default to Serial.",
+				Type:        proto.ColumnType_STRING,
 				Transform:   transform.FromField("Spec.RunPolicy"),
 			},
 			{
 				Name:        "successful_builds_history_limit",
-				Type:        proto.ColumnType_INT,
 				Description: "It is the number of old successful builds to retain. If not specified, all successful builds are retained.",
+				Type:        proto.ColumnType_INT,
 				Transform:   transform.FromField("Spec.SuccessfulBuildsHistoryLimit"),
 			},
 			{
 				Name:        "failed_builds_history_limit",
-				Type:        proto.ColumnType_INT,
 				Description: "It is the number of old failed builds to retain. If not specified, all failed builds are retained.",
+				Type:        proto.ColumnType_INT,
 				Transform:   transform.FromField("Spec.FailedBuildsHistoryLimit"),
 			},
 			{
 				Name:        "last_version",
-				Type:        proto.ColumnType_STRING,
 				Description: "Last version is used to inform about number of last triggered build.",
+				Type:        proto.ColumnType_INT,
 				Transform:   transform.FromField("Status.LastVersion"),
 			},
+			{
+				Name:        "image_change_triggers",
+				Description: "ImageChangeTriggers captures the runtime state of any ImageChangeTrigger specified in the BuildConfigSpec, including the value reconciled by the OpenShift APIServer for the lastTriggeredImageID.",
+				Type:        proto.ColumnType_JSON,
+				Transform:   transform.FromField("Status.ImageChangeTriggers"),
+			},
 
-			/// Steampipe standard columns
+			// Steampipe standard columns
 			{
 				Name:        "title",
 				Description: "Title of the resource.",

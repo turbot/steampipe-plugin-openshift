@@ -25,53 +25,53 @@ func tableOpenShiftOAuthAccessToken(ctx context.Context) *plugin.Table {
 		Columns: commonColumns([]*plugin.Column{
 			{
 				Name:        "client_name",
-				Type:        proto.ColumnType_STRING,
 				Description: "ClientName references the client that created this token.",
+				Type:        proto.ColumnType_STRING,
 			},
 			{
 				Name:        "expires_in",
-				Type:        proto.ColumnType_INT,
 				Description: "ExpiresIn is the seconds from CreationTime before this token expires.",
+				Type:        proto.ColumnType_INT,
 			},
 			{
 				Name:        "scopes",
-				Type:        proto.ColumnType_JSON,
 				Description: "Scopes is an array of the requested scopes.",
+				Type:        proto.ColumnType_JSON,
 			},
 			{
 				Name:        "redirect_uri",
-				Type:        proto.ColumnType_STRING,
 				Description: "RedirectURI is the redirection associated with the token.",
+				Type:        proto.ColumnType_STRING,
 				Transform:   transform.FromField("RedirectURI"),
 			},
 			{
 				Name:        "user_name",
-				Type:        proto.ColumnType_STRING,
 				Description: "The user name associated with this token.",
+				Type:        proto.ColumnType_STRING,
 			},
 			{
 				Name:        "user_uid",
-				Type:        proto.ColumnType_STRING,
 				Description: "UserUID is the unique UID associated with this token.",
+				Type:        proto.ColumnType_STRING,
 				Transform:   transform.FromField("UserUID"),
 			},
 			{
 				Name:        "authorize_token",
-				Type:        proto.ColumnType_STRING,
 				Description: "AuthorizeToken contains the token that authorized this token.",
+				Type:        proto.ColumnType_STRING,
 			},
 			{
 				Name:        "refresh_token",
-				Type:        proto.ColumnType_STRING,
 				Description: "RefreshToken is the value by which this token can be renewed. Can be blank.",
+				Type:        proto.ColumnType_STRING,
 			},
 			{
 				Name:        "inactivity_timeout_seconds",
-				Type:        proto.ColumnType_INT,
 				Description: "InactivityTimeoutSeconds is the value in seconds, from the CreationTimestamp, after which this token can no longer be used. The value is automatically incremented when the token is used.",
+				Type:        proto.ColumnType_INT,
 			},
 
-			/// Steampipe standard columns
+			// Steampipe standard columns
 			{
 				Name:        "title",
 				Description: "Title of the resource.",

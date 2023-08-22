@@ -27,36 +27,36 @@ func tableOpenShiftImageStream(ctx context.Context) *plugin.Table {
 		Columns: commonColumns([]*plugin.Column{
 			{
 				Name:        "lookup_policy",
-				Type:        proto.ColumnType_JSON,
 				Description: "Lookup policy controls how other resources reference images within this namespace.",
+				Type:        proto.ColumnType_JSON,
 				Transform:   transform.FromField("Spec.LookupPolicy"),
 			},
 			{
 				Name:        "spec_tags",
-				Type:        proto.ColumnType_JSON,
 				Description: "Tags map arbitrary string values to specific image locators.",
+				Type:        proto.ColumnType_JSON,
 				Transform:   transform.FromField("Spec.Tags"),
 			},
 			{
 				Name:        "docker_image_repository",
-				Type:        proto.ColumnType_STRING,
 				Description: "It represents the effective location this stream may be accessed at. May be empty until the server determines where the repository is located.",
+				Type:        proto.ColumnType_STRING,
 				Transform:   transform.FromField("Status.DockerImageRepository"),
 			},
 			{
 				Name:        "public_docker_image_repository",
-				Type:        proto.ColumnType_STRING,
 				Description: "It represents the public location from where the image can be pulled outside the cluster. This field may be empty if the administrator has not exposed the integrated registry externally.",
+				Type:        proto.ColumnType_STRING,
 				Transform:   transform.FromField("Status.PublicDockerImageRepository"),
 			},
 			{
 				Name:        "status_tags",
-				Type:        proto.ColumnType_JSON,
 				Description: "Tags are a historical record of images associated with each tag. The first entry in the TagEvent array is the currently tagged image.",
+				Type:        proto.ColumnType_JSON,
 				Transform:   transform.FromField("Status.Tags"),
 			},
 
-			/// Steampipe standard columns
+			// Steampipe standard columns
 			{
 				Name:        "title",
 				Description: "Title of the resource.",

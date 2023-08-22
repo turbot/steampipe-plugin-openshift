@@ -25,16 +25,21 @@ func tableOpenShiftUser(ctx context.Context) *plugin.Table {
 		Columns: commonColumns([]*plugin.Column{
 			{
 				Name:        "full_name",
-				Type:        proto.ColumnType_STRING,
 				Description: "The full name of the user.",
+				Type:        proto.ColumnType_STRING,
 			},
 			{
 				Name:        "identities",
-				Type:        proto.ColumnType_JSON,
 				Description: "Identities are the identities associated with this user.",
+				Type:        proto.ColumnType_JSON,
+			},
+			{
+				Name:        "groups",
+				Description: "Groups specifies group names this user is a member of.",
+				Type:        proto.ColumnType_JSON,
 			},
 
-			/// Steampipe standard columns
+			// Steampipe standard columns
 			{
 				Name:        "title",
 				Description: "Title of the resource.",

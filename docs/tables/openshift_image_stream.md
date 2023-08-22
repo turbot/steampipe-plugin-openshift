@@ -19,7 +19,7 @@ from
   openshift_image_stream;
 ```
 
-### List streams present in default namespace
+### List image streams present in default namespace
 
 ```sql
 select
@@ -36,7 +36,7 @@ where
   namespace = 'default';
 ```
 
-### List deleted streams
+### List deleted image streams
 
 ```sql
 select
@@ -53,7 +53,7 @@ where
   deletion_timestamp is not null;
 ```
 
-### Get stream annotations
+### Get image stream annotations
 
 ```sql
 select
@@ -65,7 +65,7 @@ from
   openshift_image_stream;
 ```
 
-### Get stream spec tags
+### Get image stream spec tags
 
 ```sql
 select
@@ -77,7 +77,7 @@ from
   openshift_image_stream;
 ```
 
-### Get stream status tags
+### Get image stream status tags
 
 ```sql
 select
