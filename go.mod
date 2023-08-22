@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/openshift/client-go v0.0.0-20230607134213-3cd0021bbee3
-	github.com/turbot/steampipe-plugin-sdk/v5 v5.5.0-rc.0
+	github.com/turbot/steampipe-plugin-sdk/v5 v5.5.0
 	gopkg.in/yaml.v2 v2.4.0
 	k8s.io/apimachinery v0.27.2
 	k8s.io/client-go v0.27.2
@@ -59,7 +59,7 @@ require (
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
 	github.com/hashicorp/go-getter v1.7.1 // indirect
 	github.com/hashicorp/go-hclog v1.4.0 // indirect
-	github.com/hashicorp/go-plugin v1.4.8 // indirect
+	github.com/hashicorp/go-plugin v1.4.10 // indirect
 	github.com/hashicorp/go-safetemp v1.0.0 // indirect
 	github.com/hashicorp/go-version v1.6.0 // indirect
 	github.com/hashicorp/hcl/v2 v2.15.0 // indirect
