@@ -57,7 +57,7 @@ func tableOpenShiftBuildConfig(ctx context.Context) *plugin.Table {
 			},
 			{
 				Name:        "last_version",
-				Description: "Last version is used to inform about number of last triggered build.",
+				Description: "Last version is used to inform about the number of last triggered builds.",
 				Type:        proto.ColumnType_INT,
 				Transform:   transform.FromField("Status.LastVersion"),
 			},
