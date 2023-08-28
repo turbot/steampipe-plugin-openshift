@@ -18,7 +18,7 @@ from
   openshift_build_config;
 ```
 
-### List build configs present in default namespace
+### List build configs present in the default namespace
 
 ```sql
 select
@@ -50,7 +50,7 @@ where
   run_policy = 'Serial';
 ```
 
-### List build configs created in last 30 days
+### List build configs created in the last 30 days
 
 ```sql
 select
