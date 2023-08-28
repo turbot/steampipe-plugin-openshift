@@ -33,7 +33,7 @@ func tableOpenShiftRoute(ctx context.Context) *plugin.Table {
 			},
 			{
 				Name:        "path",
-				Description: "Path that the router watches for, to route traffic for to the service.",
+				Description: "Path that the router watches for, to route traffic to the service.",
 				Transform:   transform.FromField("Spec.Path"),
 				Type:        proto.ColumnType_STRING,
 			},
@@ -45,7 +45,7 @@ func tableOpenShiftRoute(ctx context.Context) *plugin.Table {
 			},
 			{
 				Name:        "alternate_backends",
-				Description: "Alternate backends allows up to 3 additional backends to be assigned to the route. Only the Service kind is allowed, and it will be defaulted to Service.Use the weight field in RouteTargetReference object to specify relative preference.",
+				Description: "Alternate backends allow up to 3 additional backends to be assigned to the route. Only the Service kind is allowed, and it will be defaulted to Service. Use the weight field in RouteTargetReference object to specify relative preference.",
 				Type:        proto.ColumnType_JSON,
 				Transform:   transform.FromField("Spec.AlternateBackends"),
 			},
@@ -57,7 +57,7 @@ func tableOpenShiftRoute(ctx context.Context) *plugin.Table {
 			},
 			{
 				Name:        "subdomain",
-				Description: "Subdomain is a DNS subdomain that is requested within the ingress controller's domain (as a subdomain). If host is set this field is ignored. An ingress controller may choose to ignore this suggested name, in which case the controller will report the assigned name in the status.",
+				Description: "Subdomain is a DNS subdomain that is requested within the ingress controller's domain (as a subdomain). If the host is set this field is ignored. An ingress controller may choose to ignore this suggested name, in which case the controller will report the assigned name in the status.",
 				Type:        proto.ColumnType_STRING,
 				Transform:   transform.FromField("Spec.Subdomain"),
 			},
@@ -69,7 +69,7 @@ func tableOpenShiftRoute(ctx context.Context) *plugin.Table {
 			},
 			{
 				Name:        "wildcard_policy",
-				Description: "Wildcard policy if any for the route.Currently only 'Subdomain' or 'None' is allowed.",
+				Description: "Wildcard policy if any for the route. Currently only 'Subdomain' or 'None' is allowed.",
 				Type:        proto.ColumnType_STRING,
 				Transform:   transform.FromField("Spec.WildcardPolicy"),
 			},
