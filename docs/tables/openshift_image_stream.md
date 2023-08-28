@@ -1,6 +1,6 @@
 # Table: openshift_image_stream
 
-Image streams provide a means of creating and updating container images in an on-going way. As improvements are made to an image, tags can be used to assign new version numbers and keep track of changes.
+Image streams provide a means of creating and updating container images in an ongoing way. As improvements are made to an image, tags can be used to assign new version numbers and keep track of changes.
 
 ## Examples
 
@@ -19,7 +19,7 @@ from
   openshift_image_stream;
 ```
 
-### List image streams present in default namespace
+### List image streams present in the default namespace
 
 ```sql
 select
