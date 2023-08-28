@@ -1,6 +1,6 @@
 # Table: openshift_user
 
-A user is an entity that interacts with the OpenShift Container Platform API. These can be a developer for developing applications or an administrator for managing the cluster. Users can be assigned to groups, which set the permissions applied to all the group’s members. For example, you can give API access to a group, which give all members of the group API access.
+A user is an entity that interacts with the OpenShift Container Platform API. These can be a developer for developing applications or an administrator for managing the cluster. Users can be assigned to groups, which sets the permissions applied to all the group’s members. For example, you can give API access to a group, which gives all members of the group API access.
 
 ## Examples
 
@@ -19,7 +19,7 @@ from
   openshift_user;
 ```
 
-### List users which are not associated with any identities
+### List users who are not associated with any identities
 
 ```sql
 select
@@ -36,7 +36,7 @@ where
   identities is null;
 ```
 
-### List users created in last 30 days
+### List users created in the last 30 days
 
 ```sql
 select
@@ -53,7 +53,7 @@ where
   creation_timestamp >= now() - interval '30' day;
 ```
 
-### List users who has admin access
+### List users who have admin access
 
 ```sql
 select
