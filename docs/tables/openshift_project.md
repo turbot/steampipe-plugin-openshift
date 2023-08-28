@@ -36,7 +36,7 @@ where
   phase <> 'Active';
 ```
 
-### List projects created in last 30 days
+### List projects created in the last 30 days
 
 ```sql
 select
