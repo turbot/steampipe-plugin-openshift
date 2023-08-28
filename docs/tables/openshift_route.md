@@ -19,7 +19,7 @@ from
   openshift_route;
 ```
 
-### List routes which are present in default namespace
+### List routes that are present in the default namespace
 
 ```sql
 select
