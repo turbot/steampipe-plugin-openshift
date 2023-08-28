@@ -21,7 +21,7 @@ from
   openshift_deployment_config;
 ```
 
-### List deployment configs present in default namespace
+### List deployment configs present in the default namespace
 
 ```sql
 select
@@ -59,7 +59,7 @@ where
   paused;
 ```
 
-### List deployment configs created in last 30 days
+### List deployment configs created in the last 30 days
 
 ```sql
 select
@@ -88,7 +88,7 @@ select
   c ->> 'image' as image
 from
   openshift_deployment_config,
-  jsonb_array_elements(template -> 'spec' -> 'containerc') as c
+  jsonb_array_elements(template -> 'Spec' -> 'Containers') as c
 order by
   namespace,
   name;
