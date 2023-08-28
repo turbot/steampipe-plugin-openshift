@@ -99,7 +99,7 @@ func tableOpenShiftBuild(ctx context.Context) *plugin.Table {
 			},
 			{
 				Name:        "stages",
-				Description: "Stages contains details about each stage that occurs during the build including start time, duration (in milliseconds), and the steps that occured within each stage.",
+				Description: "Stages contain details about each stage that occurs during the build including start time, duration (in milliseconds), and the steps that occurred within each stage.",
 				Type:        proto.ColumnType_JSON,
 				Transform:   transform.FromField("Status.Stages"),
 			},
@@ -111,7 +111,7 @@ func tableOpenShiftBuild(ctx context.Context) *plugin.Table {
 			},
 			{
 				Name:        "conditions",
-				Description: "Conditions represents the latest available observations of a build's current state.",
+				Description: "Conditions represent the latest available observations of a build's current state.",
 				Type:        proto.ColumnType_STRING,
 				Transform:   transform.FromField("Status.Conditions"),
 			},
