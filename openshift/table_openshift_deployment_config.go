@@ -99,7 +99,7 @@ func tableOpenShiftDeploymentConfig(ctx context.Context) *plugin.Table {
 			},
 			{
 				Name:        "updated_replicas",
-				Description: "The total number of non-terminated pods targeted by this deployment config that have the desired template spec.",
+				Description: "The total number of non-terminated pods targeted by this deployment config that has the desired template spec.",
 				Type:        proto.ColumnType_INT,
 				Transform:   transform.FromField("Status.UpdatedReplicas"),
 			},
@@ -123,7 +123,7 @@ func tableOpenShiftDeploymentConfig(ctx context.Context) *plugin.Table {
 			},
 			{
 				Name:        "conditions",
-				Description: "Conditions represents the latest available observations of a deployment config's current state.",
+				Description: "Conditions represent the latest available observations of a deployment config's current state.",
 				Type:        proto.ColumnType_JSON,
 				Transform:   transform.FromField("Status.Conditions"),
 			},
