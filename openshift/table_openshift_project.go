@@ -31,13 +31,13 @@ func tableOpenShiftProject(ctx context.Context) *plugin.Table {
 			},
 			{
 				Name:        "conditions",
-				Description: "Represents the latest available observations of the project current state.",
+				Description: "Represents the latest available observations of the project's current state.",
 				Type:        proto.ColumnType_JSON,
 				Transform:   transform.FromField("Status.Conditions"),
 			},
 			{
 				Name:        "spec_finalizers",
-				Description: "Finalizers is an opaque list of values that must be empty to permanently remove object from storage.",
+				Description: "Finalizers is an opaque list of values that must be empty to permanently remove an object from storage.",
 				Type:        proto.ColumnType_JSON,
 				Transform:   transform.FromField("Spec.Finalizers"),
 			},
