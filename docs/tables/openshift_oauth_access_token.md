@@ -32,7 +32,7 @@ from
   openshift_oauth_access_token;
 ```
 
-### List token with admin access
+### List tokens with admin access
 
 ```sql
 select

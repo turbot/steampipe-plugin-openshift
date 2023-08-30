@@ -72,7 +72,7 @@ from
   openshift_build;
 ```
 
-### Get triggered details of the builds
+### Get trigger details of the builds
 
 ```sql
 select
@@ -85,7 +85,7 @@ from
   openshift_build;
 ```
 
-### Get stages of the builds
+### Get stage details of the builds
 
 ```sql
 select
