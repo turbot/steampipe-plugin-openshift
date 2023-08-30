@@ -44,7 +44,7 @@ func tableOpenShiftDeploymentConfig(ctx context.Context) *plugin.Table {
 				Transform:   transform.FromField("Spec.Triggers"),
 			},
 			{
-				Name:        "replicas",
+				Name:        "spec_replicas",
 				Description: "Replicas is the number of desired replicas.",
 				Type:        proto.ColumnType_INT,
 				Transform:   transform.FromField("Spec.Replicas"),
@@ -92,7 +92,7 @@ func tableOpenShiftDeploymentConfig(ctx context.Context) *plugin.Table {
 				Transform:   transform.FromField("Status.ObservedGeneration"),
 			},
 			{
-				Name:        "replicas",
+				Name:        "status_replicas",
 				Description: "Replicas is the total number of pods targeted by this deployment config.",
 				Type:        proto.ColumnType_INT,
 				Transform:   transform.FromField("Status.Replicas"),

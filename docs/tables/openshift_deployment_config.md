@@ -11,7 +11,7 @@ select
   uid,
   name,
   namespace,
-  replicas,
+  spec_replicas
   ready_replicas,
   updated_replicas,
   available_replicas,
@@ -28,7 +28,7 @@ select
   uid,
   name,
   namespace,
-  replicas,
+  spec_replicas
   ready_replicas,
   updated_replicas,
   available_replicas,
@@ -47,7 +47,7 @@ select
   uid,
   name,
   namespace,
-  replicas,
+  spec_replicas
   ready_replicas,
   updated_replicas,
   available_replicas,
@@ -66,7 +66,7 @@ select
   uid,
   name,
   namespace,
-  replicas,
+  spec_replicas
   ready_replicas,
   updated_replicas,
   available_replicas,
