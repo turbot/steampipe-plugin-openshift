@@ -6,7 +6,7 @@ Use SQL to query projects, routes, builds and more from OpenShift.
 
 - **[Get started →](https://hub.steampipe.io/plugins/turbot/openshift)**
 - Documentation: [Table definitions & examples](https://hub.steampipe.io/plugins/turbot/openshift/tables)
-- Community: [Slack Channel](https://steampipe.io/community/join)
+- Community: [Join #steampipe on Slack →](https://turbot.com/community/join)
 - Get involved: [Issues](https://github.com/turbot/steampipe-plugin-openshift/issues)
 
 ## Quick start
@@ -122,5 +122,5 @@ Please see the [contribution guidelines](https://github.com/turbot/steampipe/blo
 
 `help wanted` issues:
 
-- [Steampipe](https://github.com/turbot/steampipe/labels/help%20wanted)
 - [OpenShift Plugin](https://github.com/turbot/steampipe-plugin-openshift/labels/help%20wanted)
+- [Steampipe](https://github.com/turbot/steampipe/labels/help%20wanted)
