@@ -1,10 +1,20 @@
-# Table: openshift_build_config
+---
+title: "Steampipe Table: openshift_build_config - Query OpenShift Build Configurations using SQL"
+description: "Allows users to query OpenShift Build Configurations, specifically providing details about the build strategy, source, output, and triggers."
+---
 
-A build configuration, or BuildConfig, is characterized by a build strategy and one or more sources. The strategy determines the aforementioned process, while the sources provide its input.
+# Table: openshift_build_config - Query OpenShift Build Configurations using SQL
+
+OpenShift Build Configurations are a key resource in the OpenShift platform that defines the parameters for building an application. They specify the source code repository, the build strategy (Docker, Source-to-Image, or Custom), and the output image. Build Configurations also specify triggers, which cause a new build to be run automatically when certain events occur.
+
+## Table Usage Guide
+
+The `openshift_build_config` table provides insights into the configuration details of builds within the OpenShift platform. As a DevOps engineer or system administrator, explore build-specific details through this table, including the source code repository, build strategy, output image, and triggers. Utilize it to manage and monitor the build process, ensuring that builds are configured correctly and running as expected.
 
 ## Examples
 
 ### Basic info
+Explore which OpenShift build configurations have been created and their respective run policies. This can help in understanding the frequency of successful builds, thereby aiding in optimizing the build process.
 
 ```sql
 select
@@ -19,6 +29,7 @@ from
 ```
 
 ### List build configs present in the default namespace
+Explore the build configurations present in the default workspace to understand the build policies, creation times, and history limits of successful builds. This can be useful in managing and optimizing your build processes.
 
 ```sql
 select
@@ -35,6 +46,7 @@ where
 ```
 
 ### List build configs with default run policy
+Explore which build configurations are using the default 'Serial' run policy. This can help in managing and optimizing build processes in an OpenShift environment.
 
 ```sql
 select
@@ -51,6 +63,7 @@ where
 ```
 
 ### List build configs created in the last 30 days
+Explore the recently created build configurations to understand their run policies and success rates. This can help assess the efficiency of your configurations and identify areas for improvement.
 
 ```sql
 select
@@ -67,6 +80,7 @@ where
 ```
 
 ### List common specs of the build configs
+Discover the common specifications of your build configurations in OpenShift to better understand and manage your application's build process. This can be particularly useful for identifying potential areas of optimization or troubleshooting issues.
 
 ```sql
 select
@@ -79,6 +93,7 @@ from
 ```
 
 ### Get triggers of the build configs
+Explore which build configurations in your Openshift environment have triggers set up. This can help you understand and manage automated build processes in your system.
 
 ```sql
 select
@@ -91,6 +106,7 @@ from
 ```
 
 ### List builds associated with a particular build config
+Explore which builds are linked to a specific configuration to understand their performance and status. This is beneficial for assessing the efficiency of different configurations and identifying any potential issues.
 
 ```sql
 select

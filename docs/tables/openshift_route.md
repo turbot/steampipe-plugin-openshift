@@ -1,6 +1,15 @@
-# Table: openshift_route
+---
+title: "Steampipe Table: openshift_route - Query OpenShift Routes using SQL"
+description: "Allows users to query OpenShift Routes, providing insights into the route objects that define the desired host for externally-reachable services."
+---
 
-A route allows you to host your application at a public URL. It can either be secure or unsecured, depending on the network security configuration of your application. An HTTP-based route is an unsecured route that uses the basic HTTP routing protocol and exposes a service on an unsecured application port.
+# Table: openshift_route - Query OpenShift Routes using SQL
+
+OpenShift Routes is a resource within Red Hat OpenShift that helps expose a service at a host name, like www.example.com, so that external clients can reach it by name. It provides a way to aggregate multiple services under the same IP address and differentiate them with the host name. OpenShift Routes makes it easy to expose services to the internet and manage traffic to your applications.
+
+## Table Usage Guide
+
+The `openshift_route` table provides insights into the route objects within Red Hat OpenShift. As a DevOps engineer, you can explore route-specific details through this table, including the host, path, and the associated services. Utilize it to manage and monitor the accessibility of your applications, ensuring they are reachable and functioning as expected.
 
 ## Examples
 

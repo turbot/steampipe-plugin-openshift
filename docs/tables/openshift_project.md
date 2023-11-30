@@ -1,6 +1,15 @@
-# Table: openshift_project
+---
+title: "Steampipe Table: openshift_project - Query OpenShift Projects using SQL"
+description: "Allows users to query OpenShift Projects, specifically retrieving details about project metadata, status, and specifications."
+---
 
-In OpenShift, a project is a container for organizing and isolating resources such as applications and services. It provides a boundary for access control and resource allocation, allowing multiple teams or users to work independently within their own project. Projects enable efficient management and collaboration in multi-tenant environments.
+# Table: openshift_project - Query OpenShift Projects using SQL
+
+OpenShift Projects are a top-level scope for managing and organizing resources in an OpenShift cluster. They provide a logical, hierarchical organization for a set of resources and users. Projects are essentially Kubernetes namespaces with additional annotations, providing a unique scope for objects such as pods, services, and replication controllers.
+
+## Table Usage Guide
+
+The `openshift_project` table provides insights into Projects within OpenShift. As a DevOps engineer or system administrator, explore project-specific details through this table, including metadata, status, and specifications. Utilize it to uncover information about projects, such as those with specific resource quotas, role bindings, and service accounts, aiding in the management and organization of your OpenShift cluster.
 
 ## Examples
 
