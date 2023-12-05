@@ -16,7 +16,20 @@ The `openshift_oauth_access_token` table provides insights into OAuth Access Tok
 ### Basic info
 Gain insights into the authorization patterns by analyzing the validity and usage of access tokens in your Openshift environment. This is particularly useful for assessing security measures and identifying potential vulnerabilities.
 
-```sql
+```sql+postgres
+select
+  uid,
+  name,
+  authorize_token,
+  refresh_token,
+  expires_in,
+  user_name,
+  user_uid
+from
+  openshift_oauth_access_token;
+```
+
+```sql+sqlite
 select
   uid,
   name,
@@ -32,7 +45,7 @@ from
 ### Get token scopes
 Assess the elements within your system to understand which user tokens are nearing expiration. This is beneficial in maintaining security and ensuring uninterrupted user access.
 
-```sql
+```sql+postgres
 select
   uid,
   name,
@@ -43,10 +56,21 @@ from
   openshift_oauth_access_token;
 ```
 
+```sql+sqlite
+select
+  uid,
+  name,
+  expires_in,
+  user_name,
+  scopes
+from
+  openshift_oauth_access_token;
+```
+
 ### List tokens with admin access
 Explore which tokens have full administrative access. This is beneficial in analyzing your security configuration and identifying potential vulnerabilities.
 
-```sql
+```sql+postgres
 select
   uid,
   name,
@@ -62,10 +86,26 @@ where
   scope like '%full%';
 ```
 
+```sql+sqlite
+select
+  uid,
+  name,
+  authorize_token,
+  refresh_token,
+  expires_in,
+  user_name,
+  user_uid
+from
+  openshift_oauth_access_token,
+  json_each(scopes) as scope
+where
+  scope.value like '%full%';
+```
+
 ### List expired tokens
 Discover the segments that have expired tokens in the OpenShift OAuth access to identify potential security risks or unauthorized access. This is particularly useful for maintaining system integrity and ensuring user account safety.
 
-```sql
+```sql+postgres
 select
   uid,
   name,
@@ -78,4 +118,19 @@ from
   openshift_oauth_access_token
 where
   extract(epoch from age(current_timestamp,creation_timestamp))::int > expires_in;
+```
+
+```sql+sqlite
+select
+  uid,
+  name,
+  authorize_token,
+  refresh_token,
+  expires_in,
+  user_name,
+  user_uid
+from
+  openshift_oauth_access_token
+where
+  cast((julianday('now') - julianday(creation_timestamp)) * 86400 as integer) > expires_in;
 ```

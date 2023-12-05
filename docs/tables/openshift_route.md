@@ -15,7 +15,20 @@ The `openshift_route` table provides insights into the route objects within Red 
 
 ### Basic info
 
-```sql
+```sql+postgres
+select
+  uid,
+  name,
+  path,
+  host,
+  creation_timestamp,
+  resource_version,
+  namespace
+from
+  openshift_route;
+```
+
+```sql+sqlite
 select
   uid,
   name,
@@ -30,7 +43,22 @@ from
 
 ### List routes that are present in the default namespace
 
-```sql
+```sql+postgres
+select
+  uid,
+  name,
+  path,
+  host,
+  creation_timestamp,
+  resource_version,
+  namespace
+from
+  openshift_route
+where
+  namespace = 'default';
+```
+
+```sql+sqlite
 select
   uid,
   name,
@@ -47,7 +75,22 @@ where
 
 ### List deleted routes
 
-```sql
+```sql+postgres
+select
+  uid,
+  name,
+  path,
+  host,
+  creation_timestamp,
+  resource_version,
+  namespace
+from
+  openshift_route
+where
+  deletion_timestamp is not null;
+```
+
+```sql+sqlite
 select
   uid,
   name,
@@ -64,7 +107,7 @@ where
 
 ### List routes ingresses
 
-```sql
+```sql+postgres
 select
   uid,
   name,
@@ -74,9 +117,19 @@ from
   openshift_route;
 ```
 
+```sql+sqlite
+select
+  uid,
+  name,
+  namespace,
+  ingress
+from
+  openshift_route;
+```
+
 ### List routes associated with a particular service
 
-```sql
+```sql+postgres
 select
   uid,
   name,
@@ -92,9 +145,7 @@ where
   and spec_to ->> 'name' = 'console';
 ```
 
-### List routes associated with a particular daemonset
-
-```sql
+```sql+sqlite
 select
   uid,
   name,
@@ -104,9 +155,44 @@ select
   resource_version,
   namespace
 from
-  openshift_route,
+  openshift_route
+where
+  json_extract(spec_to, '$.kind') = 'Service'
+  and json_extract(spec_to, '$.name') = 'console';
+```
+
+### List routes associated with a particular daemonset
+
+```sql+postgres
+select
+  uid,
+  name,
+  or.path,
+  host,
+  creation_timestamp,
+  resource_version,
+  namespace
+from
+  openshift_route as or,
   jsonb_array_elements(owner_references) owner
 where
   owner ->> 'kind' = 'daemonset'
   and owner ->> 'name' = 'ingress-canary';
+```
+
+```sql+sqlite
+select
+  uid,
+  name,
+  osr.path,
+  host,
+  creation_timestamp,
+  resource_version,
+  namespace
+from
+  openshift_route as osr,
+  json_each(owner_references) as owner
+where
+  json_extract(owner.value, '$.kind') = 'daemonset'
+  and json_extract(owner.value, '$.name') = 'ingress-canary';
 ```

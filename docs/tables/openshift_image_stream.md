@@ -15,7 +15,20 @@ The `openshift_image_stream` table provides insights into Image Streams within O
 
 ### Basic info
 
-```sql
+```sql+postgres
+select
+  uid,
+  name,
+  namespace,
+  resource_version,
+  generation,
+  docker_image_repository,
+  creation_timestamp
+from
+  openshift_image_stream;
+```
+
+```sql+sqlite
 select
   uid,
   name,
@@ -30,7 +43,22 @@ from
 
 ### List image streams present in the default namespace
 
-```sql
+```sql+postgres
+select
+  uid,
+  name,
+  namespace,
+  resource_version,
+  generation,
+  docker_image_repository,
+  creation_timestamp
+from
+  openshift_image_stream
+where
+  namespace = 'default';
+```
+
+```sql+sqlite
 select
   uid,
   name,
@@ -47,7 +75,22 @@ where
 
 ### List deleted image streams
 
-```sql
+```sql+postgres
+select
+  uid,
+  name,
+  namespace,
+  resource_version,
+  generation,
+  docker_image_repository,
+  creation_timestamp
+from
+  openshift_image_stream
+where
+  deletion_timestamp is not null;
+```
+
+```sql+sqlite
 select
   uid,
   name,
@@ -64,7 +107,7 @@ where
 
 ### Get image stream annotations
 
-```sql
+```sql+postgres
 select
   uid,
   name,
@@ -74,9 +117,19 @@ from
   openshift_image_stream;
 ```
 
+```sql+sqlite
+select
+  uid,
+  name,
+  namespace,
+  annotations
+from
+  openshift_image_stream;
+```
+
 ### Get image stream spec tags
 
-```sql
+```sql+postgres
 select
   uid,
   name,
@@ -86,14 +139,34 @@ from
   openshift_image_stream;
 ```
 
+```sql+sqlite
+select
+  uid,
+  name,
+  namespace,
+  spec_tags
+from
+  openshift_image_stream;
+```
+
 ### Get image stream status tags
 
-```sql
+```sql+postgres
 select
   uid,
   name,
   namespace,
   jsonb_pretty(status_tags) as status_tags
+from
+  openshift_image_stream;
+```
+
+```sql+sqlite
+select
+  uid,
+  name,
+  namespace,
+  status_tags
 from
   openshift_image_stream;
 ```

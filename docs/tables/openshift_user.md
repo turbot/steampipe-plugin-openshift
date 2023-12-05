@@ -15,7 +15,20 @@ The `openshift_user` table provides insights into user profiles within OpenShift
 
 ### Basic info
 
-```sql
+```sql+postgres
+select
+  uid,
+  name,
+  full_name,
+  resource_version,
+  creation_timestamp,
+  generation,
+  deletion_grace_period_seconds
+from
+  openshift_user;
+```
+
+```sql+sqlite
 select
   uid,
   name,
@@ -30,7 +43,22 @@ from
 
 ### List users who are not associated with any identities
 
-```sql
+```sql+postgres
+select
+  uid,
+  name,
+  full_name,
+  resource_version,
+  creation_timestamp,
+  generation,
+  deletion_grace_period_seconds
+from
+  openshift_user
+where
+  identities is null;
+```
+
+```sql+sqlite
 select
   uid,
   name,
@@ -47,7 +75,7 @@ where
 
 ### List users created in the last 30 days
 
-```sql
+```sql+postgres
 select
   uid,
   name,
@@ -62,9 +90,24 @@ where
   creation_timestamp >= now() - interval '30' day;
 ```
 
+```sql+sqlite
+select
+  uid,
+  name,
+  full_name,
+  resource_version,
+  creation_timestamp,
+  generation,
+  deletion_grace_period_seconds
+from
+  openshift_user
+where
+  creation_timestamp >= datetime('now', '-30 day');
+```
+
 ### List users who have admin access
 
-```sql
+```sql+postgres
 select
   distinct u.uid,
   u.name,
@@ -82,9 +125,27 @@ where
   and scope = 'user:full';
 ```
 
+```sql+sqlite
+select
+  distinct u.uid,
+  u.name,
+  full_name,
+  u.resource_version,
+  u.creation_timestamp,
+  u.generation,
+  u.deletion_grace_period_seconds
+from
+  openshift_user as u,
+  openshift_oauth_access_token as t,
+  json_each(t.scopes) as scope
+where
+  u.uid = t.user_uid
+  and scope.value = 'user:full';
+```
+
 ### List rules associated with a particular user
 
-```sql
+```sql+postgres
 select
   uid,
   name,
@@ -103,5 +164,27 @@ where
     where
       s ->> 'kind' = 'User'
       and s ->> 'name' = 'openshift_user'
+  );
+```
+
+```sql+sqlite
+select
+  uid,
+  name,
+  namespace,
+  rules
+from
+  kubernetes_role
+where
+  name in
+  (
+    select
+      role_name
+    from
+      kubernetes_role_binding,
+      json_each(subjects) as s
+    where
+      json_extract(s.value, '$.kind') = 'User'
+      and json_extract(s.value, '$.name') = 'openshift_user'
   );
 ```

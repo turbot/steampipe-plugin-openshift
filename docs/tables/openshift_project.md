@@ -15,7 +15,20 @@ The `openshift_project` table provides insights into Projects within OpenShift. 
 
 ### Basic info
 
-```sql
+```sql+postgres
+select
+  uid,
+  name,
+  resource_version,
+  phase,
+  creation_timestamp,
+  deletion_grace_period_seconds,
+  generate_name
+from
+  openshift_project;
+```
+
+```sql+sqlite
 select
   uid,
   name,
@@ -30,7 +43,22 @@ from
 
 ### List inactive projects
 
-```sql
+```sql+postgres
+select
+  uid,
+  name,
+  resource_version,
+  phase,
+  creation_timestamp,
+  deletion_grace_period_seconds,
+  generate_name
+from
+  openshift_project
+where
+  phase <> 'Active';
+```
+
+```sql+sqlite
 select
   uid,
   name,
@@ -47,7 +75,7 @@ where
 
 ### List projects created in the last 30 days
 
-```sql
+```sql+postgres
 select
   uid,
   name,
@@ -62,9 +90,39 @@ where
   creation_timestamp >= now() - interval '30' day;
 ```
 
+```sql+sqlite
+select
+  uid,
+  name,
+  resource_version,
+  phase,
+  creation_timestamp,
+  deletion_grace_period_seconds,
+  generate_name
+from
+  openshift_project
+where
+  creation_timestamp >= datetime('now', '-30 day');
+```
+
 ### List deleted projects
 
-```sql
+```sql+postgres
+select
+  uid,
+  name,
+  resource_version,
+  phase,
+  creation_timestamp,
+  deletion_grace_period_seconds,
+  generate_name
+from
+  openshift_project
+where
+  deletion_timestamp is not null;
+```
+
+```sql+sqlite
 select
   uid,
   name,
@@ -81,7 +139,7 @@ where
 
 ### Get project annotations
 
-```sql
+```sql+postgres
 select
   uid,
   name,
@@ -92,15 +150,37 @@ from
   openshift_project;
 ```
 
+```sql+sqlite
+select
+  uid,
+  name,
+  phase,
+  creation_timestamp,
+  annotations
+from
+  openshift_project;
+```
+
 ### Get project labels
 
-```sql
+```sql+postgres
 select
   uid,
   name,
   phase,
   creation_timestamp,
   jsonb_pretty(labels) as labels
+from
+  openshift_project;
+```
+
+```sql+sqlite
+select
+  uid,
+  name,
+  phase,
+  creation_timestamp,
+  labels
 from
   openshift_project;
 ```

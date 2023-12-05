@@ -16,7 +16,22 @@ The `openshift_build` table provides insights into the build configurations with
 ### Basic info
 Analyze the settings to understand the overall performance and status of your OpenShift builds. This query helps to pinpoint specific instances where builds may have failed or been cancelled, providing insights to improve system efficiency and stability.
 
-```sql
+```sql+postgres
+select
+  uid,
+  name,
+  namespace,
+  start_timestamp,
+  reason,
+  phase,
+  cancelled,
+  duration,
+  completion_timestamp
+from
+  openshift_build;
+```
+
+```sql+sqlite
 select
   uid,
   name,
@@ -34,7 +49,24 @@ from
 ### List incomplete builds
 Discover the segments that are still in progress within your OpenShift environment. This query is useful for tracking ongoing processes and identifying any builds that may be stalled or delayed.
 
-```sql
+```sql+postgres
+select
+  uid,
+  name,
+  namespace,
+  start_timestamp,
+  reason,
+  phase,
+  cancelled,
+  duration,
+  completion_timestamp
+from
+  openshift_build
+where
+  phase <> 'Complete';
+```
+
+```sql+sqlite
 select
   uid,
   name,
@@ -54,7 +86,7 @@ where
 ### List cancelled builds
 Explore which builds have been cancelled in OpenShift to understand the reasons behind it and analyze the duration and time of cancellation. This helps in identifying any recurring issues and taking proactive measures to improve build success rates.
 
-```sql
+```sql+postgres
 select
   uid,
   name,
@@ -71,10 +103,27 @@ where
   cancelled;
 ```
 
+```sql+sqlite
+select
+  uid,
+  name,
+  namespace,
+  start_timestamp,
+  reason,
+  phase,
+  cancelled,
+  duration,
+  completion_timestamp
+from
+  openshift_build
+where
+  cancelled = 1;
+```
+
 ### List common specs of the builds
 Explore the common specifications of different builds to understand their unique configurations and phases. This can aid in identifying patterns or irregularities in build setups, thereby facilitating improved management and optimization of resources.
 
-```sql
+```sql+postgres
 select
   uid,
   name,
@@ -85,10 +134,21 @@ from
   openshift_build;
 ```
 
+```sql+sqlite
+select
+  uid,
+  name,
+  namespace,
+  phase,
+  common_spec
+from
+  openshift_build;
+```
+
 ### Get trigger details of the builds
 Analyze the settings to understand the stages and conditions that initiate specific builds in a system. This can help in identifying the triggers and resolving any issues related to the build process.
 
-```sql
+```sql+postgres
 select
   uid,
   name,
@@ -99,16 +159,38 @@ from
   openshift_build;
 ```
 
+```sql+sqlite
+select
+  uid,
+  name,
+  namespace,
+  phase,
+  triggered_by
+from
+  openshift_build;
+```
+
 ### Get stage details of the builds
 Analyze the stages of various builds to understand their progress and status, which can be useful for managing and optimizing build processes within an OpenShift environment.
 
-```sql
+```sql+postgres
 select
   uid,
   name,
   namespace,
   phase,
   jsonb_pretty(stages) as stages
+from
+  openshift_build;
+```
+
+```sql+sqlite
+select
+  uid,
+  name,
+  namespace,
+  phase,
+  stages
 from
   openshift_build;
 ```
