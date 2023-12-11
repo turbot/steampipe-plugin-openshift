@@ -8,6 +8,7 @@ short_name: "openshift"
 description: "Steampipe plugin to query projects, routes, builds and more from OpenShift."
 og_description: "Query OpenShift with SQL! Open source CLI. No DB required."
 og_image: "/images/plugins/turbot/openshift-social-graphic.png"
+engines: ["steampipe", "sqlite", "postgres", "export"]
 ---
 
 # OpenShift + Steampipe
