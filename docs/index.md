@@ -86,7 +86,4 @@ By default, the plugin will use the kubeconfig in `~/.kube/config` with the curr
 
 You can also set the kubeconfig file path and context with the `config_path` and `config_context` config arguments respectively.
 
-## Get involved
-
-- Open source: https://github.com/turbot/steampipe-plugin-openshift
-- Community: [Join #steampipe on Slack →](https://turbot.com/community/join)
+)
