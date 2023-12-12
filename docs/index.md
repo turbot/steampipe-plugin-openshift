@@ -8,13 +8,14 @@ short_name: "openshift"
 description: "Steampipe plugin to query projects, routes, builds and more from OpenShift."
 og_description: "Query OpenShift with SQL! Open source CLI. No DB required."
 og_image: "/images/plugins/turbot/openshift-social-graphic.png"
+engines: ["steampipe", "sqlite", "postgres", "export"]
 ---
 
 # OpenShift + Steampipe
 
 [OpenShift](https://docs.openshift.com/) is a container platform that provides a scalable and secure environment for deploying, managing, and scaling applications based on Kubernetes, enabling organizations to develop and run applications more efficiently and reliably.
 
-[Steampipe](https://steampipe.io) is an open source CLI to instantly query cloud APIs using SQL.
+[Steampipe](https://steampipe.io) is an open-source zero-ETL engine to instantly query cloud APIs using SQL.
 
 List your OpenShift projects:
 
@@ -85,7 +86,4 @@ By default, the plugin will use the kubeconfig in `~/.kube/config` with the curr
 
 You can also set the kubeconfig file path and context with the `config_path` and `config_context` config arguments respectively.
 
-## Get involved
-
-- Open source: https://github.com/turbot/steampipe-plugin-openshift
-- Community: [Join #steampipe on Slack →](https://turbot.com/community/join)
+)
