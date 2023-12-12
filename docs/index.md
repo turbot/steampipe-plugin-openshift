@@ -15,7 +15,7 @@ engines: ["steampipe", "sqlite", "postgres", "export"]
 
 [OpenShift](https://docs.openshift.com/) is a container platform that provides a scalable and secure environment for deploying, managing, and scaling applications based on Kubernetes, enabling organizations to develop and run applications more efficiently and reliably.
 
-[Steampipe](https://steampipe.io) is an open source CLI to instantly query cloud APIs using SQL.
+[Steampipe](https://steampipe.io) is an open-source zero-ETL engine to instantly query cloud APIs using SQL.
 
 List your OpenShift projects:
 
