@@ -2,21 +2,11 @@ package openshift
 
 import (
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
-	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/schema"
 )
 
 type openshiftConfig struct {
-	ConfigPath    *string `cty:"config_path"`
-	ConfigContext *string `cty:"config_context"`
-}
-
-var ConfigSchema = map[string]*schema.Attribute{
-	"config_path": {
-		Type: schema.TypeString,
-	},
-	"config_context": {
-		Type: schema.TypeString,
-	},
+	ConfigPath    *string `hcl:"config_path"`
+	ConfigContext *string `hcl:"config_context"`
 }
 
 func ConfigInstance() interface{} {
