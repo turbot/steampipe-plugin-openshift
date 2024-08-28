@@ -1,13 +1,13 @@
 module github.com/turbot/steampipe-plugin-openshift
 
-go 1.21.0
+go 1.22.4
 
-toolchain go1.21.1
+toolchain go1.22.6
 
 require (
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/openshift/client-go v0.0.0-20230607134213-3cd0021bbee3
-	github.com/turbot/steampipe-plugin-sdk/v5 v5.10.1
+	github.com/turbot/steampipe-plugin-sdk/v5 v5.10.3
 	gopkg.in/yaml.v2 v2.4.0
 	k8s.io/apimachinery v0.27.2
 	k8s.io/client-go v0.27.2
