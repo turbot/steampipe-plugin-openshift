@@ -7,7 +7,7 @@ toolchain go1.22.6
 require (
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/openshift/client-go v0.0.0-20230607134213-3cd0021bbee3
-	github.com/turbot/steampipe-plugin-sdk/v5 v5.10.3
+	github.com/turbot/steampipe-plugin-sdk/v5 v5.10.4
 	gopkg.in/yaml.v2 v2.4.0
 	k8s.io/apimachinery v0.27.2
 	k8s.io/client-go v0.27.2
@@ -61,7 +61,7 @@ require (
 	github.com/googleapis/gax-go/v2 v2.12.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.19.1 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
-	github.com/hashicorp/go-getter v1.7.4 // indirect
+	github.com/hashicorp/go-getter v1.7.5 // indirect
 	github.com/hashicorp/go-hclog v1.6.2 // indirect
 	github.com/hashicorp/go-plugin v1.6.0 // indirect
 	github.com/hashicorp/go-safetemp v1.0.0 // indirect
