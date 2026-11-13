@@ -8,8 +8,8 @@ import (
 	"strings"
 
 	"github.com/mitchellh/go-homedir"
-	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
-	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"
+	"github.com/turbot/steampipe-plugin-sdk/v6/plugin"
+	"github.com/turbot/steampipe-plugin-sdk/v6/plugin/transform"
 	"gopkg.in/yaml.v2"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/rest"

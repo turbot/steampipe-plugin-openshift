@@ -5,13 +5,13 @@ import (
 	"strings"
 
 	client_v1 "github.com/openshift/client-go/image/clientset/versioned/typed/image/v1"
-	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
-	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
-	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"
+	"github.com/turbot/steampipe-plugin-sdk/v6/grpc/proto"
+	"github.com/turbot/steampipe-plugin-sdk/v6/plugin"
+	"github.com/turbot/steampipe-plugin-sdk/v6/plugin/transform"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-//// TABLE DEFINITION
+// // TABLE DEFINITION
 func tableOpenShiftImageStream(ctx context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "openshift_image_stream",

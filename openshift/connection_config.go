@@ -1,7 +1,7 @@
 package openshift
 
 import (
-	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
+	"github.com/turbot/steampipe-plugin-sdk/v6/plugin"
 )
 
 type openshiftConfig struct {
@@ -15,9 +15,9 @@ func ConfigInstance() interface{} {
 
 // GetConfig :: retrieve and cast connection config from query data
 func GetConfig(connection *plugin.Connection) openshiftConfig {
-	if connection == nil || connection.Config == nil {
+	if connection == nil || connection.GetConfig() == nil {
 		return openshiftConfig{}
 	}
-	config, _ := connection.Config.(openshiftConfig)
+	config, _ := connection.GetConfig().(openshiftConfig)
 	return config
 }

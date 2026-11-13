@@ -5,13 +5,13 @@ import (
 	"strings"
 
 	client_v1 "github.com/openshift/client-go/route/clientset/versioned/typed/route/v1"
-	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
-	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
-	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"
+	"github.com/turbot/steampipe-plugin-sdk/v6/grpc/proto"
+	"github.com/turbot/steampipe-plugin-sdk/v6/plugin"
+	"github.com/turbot/steampipe-plugin-sdk/v6/plugin/transform"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-//// TABLE DEFINITION
+// // TABLE DEFINITION
 func tableOpenShiftRoute(ctx context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "openshift_route",
